@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import re
-from concurrent.futures import ThreadPoolExecutor
+
 class Movie():
 	def __init__(self,movie_id):
 		self.url = "https://www.imdb.com/title/"
