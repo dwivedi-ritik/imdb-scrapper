@@ -1,10 +1,14 @@
-from flask import Flask , render_template , request , redirect
+from flask import Flask , jsonify
 
 from flask_restful import Api , Resource
+
+from flask_cors import CORS
 
 from webscrap import Movie
 
 app = Flask(__name__)
+
+cors = CORS(app , resources = {r"/*": {"origins": "*" , "Access-Control-Allow-Origin" :"*"}})
 
 api = Api(app)
 
@@ -12,7 +16,7 @@ class Output(Resource):
 	def get(self , movie_id):
 		try:
 			res = Movie(movie_id)
-			return {"data": res.render()}
+			return jsonify({"data": res.render()})
 		except:
 			return {"error": "Either IMDB changed their html element or You are trying to acces a movies which is not realesed yet" , "apology": "Sorry :("}
 
